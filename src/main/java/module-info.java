@@ -11,4 +11,6 @@ module com.lab6.textprocessinganddatamanagementtoolteamproject {
 
     opens com.lab6.textprocessinganddatamanagementtoolteamproject to javafx.fxml;
     exports com.lab6.textprocessinganddatamanagementtoolteamproject;
+    exports com.lab6.textprocessinganddatamanagementtoolteamproject.controller;
+    opens com.lab6.textprocessinganddatamanagementtoolteamproject.controller to javafx.fxml;
 }

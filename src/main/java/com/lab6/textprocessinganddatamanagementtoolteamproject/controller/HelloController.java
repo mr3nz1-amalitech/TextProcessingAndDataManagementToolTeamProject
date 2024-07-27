@@ -1,4 +1,4 @@
-package com.lab6.textprocessinganddatamanagementtoolteamproject;
+package com.lab6.textprocessinganddatamanagementtoolteamproject.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
