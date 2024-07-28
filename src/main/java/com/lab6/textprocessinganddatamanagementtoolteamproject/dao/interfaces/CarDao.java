@@ -7,7 +7,9 @@ import java.util.Map;
 public interface CarDao extends Dao<CarModel> {
     Map<String, Integer> findAllCars();
 
-    CarModel getById(CarModel car);
+    public CarModel getById(CarModel car);
 
-    boolean delete(String name);
+    public boolean delete(String name);
+
+    public CarModel getCar(String name);
 }
