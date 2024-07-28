@@ -33,10 +33,15 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public boolean add(CarModel person) {
-        if (cars.get(person.getName()) != null) return false;
+    public boolean add(CarModel car) {
+        if (cars.isEmpty()) {
+            cars.put(car.getName(), car.getPrice());
+        }
 
-        cars.put(person.getName(), person.getPrice());
+
+        if (cars.get(car.getName()) != null) return false;
+
+        cars.put(car.getName(), car.getPrice());
 
         return true;
     }
@@ -63,5 +68,9 @@ public class CarDaoImpl implements CarDao {
         cars.remove(name);
 
         return false;
+    }
+
+    public CarModel getCar(String name) {
+        return new CarModel(name, cars.get(name));
     }
 }

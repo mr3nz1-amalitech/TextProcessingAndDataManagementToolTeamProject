@@ -2,79 +2,64 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0" style="-fx-background-color: dodgerblue;">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab6.textprocessinganddatamanagementtoolteamproject.controller.DataModuleController">
+    <children>
+      <HBox alignment="CENTER" style="-fx-background-color: dodgerblue;">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text Processing and Data Management Tool">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-         </children>
-      </VBox>
-      <HBox prefHeight="338.0" prefWidth="600.0">
-         <children>
-            <VBox prefHeight="338.0" prefWidth="282.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="57.0" prefWidth="282.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text Processing" />
-                     </children>
-                  </VBox>
-                  <TextArea prefHeight="110.0" prefWidth="282.0" promptText="Enter text" style="-fx-background-color: lightblue;" />
-                  <VBox prefHeight="27.0" prefWidth="282.0" />
-                  <TextField promptText="Enter regex" style="-fx-background-color: lightblue;" />
-                  <VBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="282.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Matched text=" />
-                     </children>
-                  </VBox>
-                  <TextField promptText="Text to replace text with" style="-fx-background-color: lightblue;" />
-                  <VBox prefHeight="32.0" prefWidth="282.0" />
-                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="282.0">
-                     <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: crimson; -fx-text-fill: white;" text="clear" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: gray; -fx-text-fill: white;" text="Replace" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Search" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="338.0" prefWidth="322.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="59.0" prefWidth="321.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text Processing" />
-                     </children>
-                  </VBox>
-                  <ComboBox prefHeight="28.0" prefWidth="333.0" promptText="Data structure" />
-                  <VBox prefHeight="26.0" prefWidth="321.0" />
-                  <ComboBox prefHeight="28.0" prefWidth="322.0" promptText="Values" />
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <TextField />
-                        <TextField promptText="Value" />
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" style="-fx-background-color: crimson; -fx-text-fill: white;" text="Remove" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Edit" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: gray; -fx-text-fill: white;" text="Add" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Management Tool">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+                <VBox prefHeight="38.0" prefWidth="192.0">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="26.0" prefWidth="172.0" />
+                        <VBox prefHeight="27.0" prefWidth="282.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="282.0" />
+                        <VBox prefHeight="32.0" prefWidth="282.0" />
+                        <HBox alignment="CENTER" prefHeight="41.0" prefWidth="282.0" />
+                    </children>
+                </VBox>
+            <Button mnemonicParsing="false" onAction="#goToTextProcessingTool" style="-fx-background-color: white; -fx-text-fill: #00000;" text="text processing" />
          </children>
       </HBox>
-   </children>
+        <HBox prefHeight="338.0" prefWidth="600.0">
+            <children>
+                <VBox prefHeight="338.0" prefWidth="322.0">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="59.0" prefWidth="321.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data Management" />
+                            </children>
+                        </VBox>
+                        <ComboBox fx:id="selectDataStructureComboBox" onAction="#handleSelectDataStructure" prefHeight="28.0" prefWidth="333.0" promptText="Data structure" />
+                        <VBox prefHeight="26.0" prefWidth="321.0" />
+                        <ComboBox fx:id="selectValueComboBox" onAction="#handleSelectValue" prefHeight="28.0" prefWidth="322.0" promptText="Values" />
+                        <VBox prefHeight="42.0" prefWidth="321.0" />
+                        <Text fx:id="dataStructureValue" strokeType="OUTSIDE" strokeWidth="0.0" text="Value=" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <VBox prefHeight="30.0" prefWidth="321.0" />
+                                <TextField fx:id="valueTextField" promptText="Value" />
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#handleDelete" style="-fx-background-color: crimson; -fx-text-fill: white;" text="Remove" />
+                                        <Button mnemonicParsing="false" onAction="#handleEdit" style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Edit" />
+                                        <Button mnemonicParsing="false" onAction="#handleAddValue" style="-fx-background-color: gray; -fx-text-fill: white;" text="Add" />
+                                    </children>
+                                </HBox>
+                                <VBox prefHeight="26.0" prefWidth="321.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </VBox>

@@ -22,20 +22,22 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public boolean add(PersonModel person) {
-        return personList.add(person);
+        if (personList.isEmpty()) {
+            return personList.add(new PersonModel(0, person.getName()));
+        }
+
+        return personList.add(new PersonModel(personList.size(), person.getName()));
     }
 
     @Override
     public boolean update(PersonModel person) {
         Optional<PersonModel> existingPerson = personList.stream().filter(object -> object.getId() == person.getId()).findFirst();
 
-
         if (existingPerson.isEmpty()) return false;
 
         existingPerson.ifPresent(object -> {
             object.setName(person.getName());
         });
-
 
         return true;
     }
