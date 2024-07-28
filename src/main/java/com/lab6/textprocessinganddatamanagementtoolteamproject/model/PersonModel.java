@@ -4,7 +4,8 @@ public class PersonModel {
     int id;
     String name;
 
-    public PersonModel(String name) {
+    public PersonModel(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

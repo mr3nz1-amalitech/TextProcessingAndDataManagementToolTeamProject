@@ -8,6 +8,7 @@ module com.lab6.textprocessinganddatamanagementtoolteamproject {
     requires net.synedra.validatorfx;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.lab6.textprocessinganddatamanagementtoolteamproject to javafx.fxml;
     exports com.lab6.textprocessinganddatamanagementtoolteamproject;
