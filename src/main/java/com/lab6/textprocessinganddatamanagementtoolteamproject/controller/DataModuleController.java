@@ -35,162 +35,246 @@ public class DataModuleController {
     BookService bookService = new BookService();
 
     public void handleSelectDataStructure(ActionEvent actionEvent) {
-        selectValueComboBox.getItems().clear();
-        if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
-            populateArrayListValues();
-        } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
-            populateHashMapValues();
-        } else if (selectDataStructureComboBox.getValue().equals("Set")) {
-            populateHashSetValues();
+        try {
+            selectValueComboBox.getItems().clear();
+            if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
+                populateArrayListValues();
+            } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
+                populateHashMapValues();
+            } else if (selectDataStructureComboBox.getValue().equals("Set")) {
+                populateHashSetValues();
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void populateArrayListValues() {
-        selectValueComboBox.getItems().addAll(personService.getAllPersons().stream().map(personModel -> personModel.getId() + " # " + personModel.getName()).toList());
+        try {
+            selectValueComboBox.getItems().addAll(personService.getAllPersons().stream().map(personModel -> personModel.getId() + " # " + personModel.getName()).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void populateHashMapValues() {
-        selectValueComboBox.getItems().addAll(carService.findAllCars().keySet().stream().map(key -> {
-            CarModel car = carService.getCar(key);
-            return "Name: " + car.getName() + ", price: $" + car.getPrice();
-        }).toList());
+        try {
+            selectValueComboBox.getItems().addAll(carService.findAllCars().keySet().stream().map(key -> {
+                CarModel car = carService.getCar(key);
+                return "Name: " + car.getName() + ", price: $" + car.getPrice();
+            }).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void populateHashSetValues() {
-        selectValueComboBox.getItems().addAll(bookService.getAll().stream().map(book -> book.getBookID() + " # " + book.getBookName()).toList());
+        try {
+            selectValueComboBox.getItems().addAll(bookService.getAll().stream().map(book -> book.getBookID() + " # " + book.getBookName()).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void initialize() {
-        selectDataStructureComboBox.getItems().addAll("ArrayList", "HashMap", "Set");
+        try {
+            selectDataStructureComboBox.getItems().addAll("ArrayList", "HashMap", "Set");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleSelectValue(ActionEvent actionEvent) {
-        dataStructureValue.setText(selectValueComboBox.getSelectionModel().getSelectedItem().toString());
+        try {
+            dataStructureValue.setText(selectValueComboBox.getSelectionModel().getSelectedItem().toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
     public void handleAddValue(ActionEvent actionEvent) {
-        selectValueComboBox.getItems().clear();
-        if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
-            handleAddToArrayList();
-        } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
-            handleAddHashMap();
-        } else {
-            handleAddHashSet();
-        }
+        try {
+            selectValueComboBox.getItems().clear();
+            if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
+                handleAddToArrayList();
+            } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
+                handleAddHashMap();
+            } else {
+                handleAddHashSet();
+            }
 
-        valueTextField.clear();
+            valueTextField.clear();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleAddToArrayList() {
-        personService.addPerson(new PersonModel(0, valueTextField.getText()));
-        selectValueComboBox.getItems().clear();
-        selectValueComboBox.getItems().addAll(personService.getAllPersons().stream().map(personModel -> personModel.getId() + " # " + personModel.getName()).toList());
+        try {
+            personService.addPerson(new PersonModel(0, valueTextField.getText()));
+            selectValueComboBox.getItems().clear();
+            selectValueComboBox.getItems().addAll(personService.getAllPersons().stream().map(personModel -> personModel.getId() + " # " + personModel.getName()).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleAddHashMap() {
-        carService.add(new CarModel(valueTextField.getText(), (int) Math.floor(Math.random() * 100000)));
-        selectValueComboBox.getItems().clear();
+        try {
+            carService.add(new CarModel(valueTextField.getText(), (int) Math.floor(Math.random() * 100000)));
+            selectValueComboBox.getItems().clear();
 
-        selectValueComboBox.getItems().addAll(carService.findAllCars().keySet().stream().map(key -> {
-            CarModel car = carService.getCar(key);
-            return "Name: " + car.getName() + ", price: $" + car.getPrice();
-        }).toList());
+            selectValueComboBox.getItems().addAll(carService.findAllCars().keySet().stream().map(key -> {
+                CarModel car = carService.getCar(key);
+                return "Name: " + car.getName() + ", price: $" + car.getPrice();
+            }).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleAddHashSet() {
-        bookService.addBook(new BookModel(0, valueTextField.getText()));
+        try {
+            bookService.addBook(new BookModel(0, valueTextField.getText()));
 
-        selectValueComboBox.getItems().addAll(bookService.getAll().stream().map(val -> val.getBookID() + " # " + val.getBookName()).toList());
+            selectValueComboBox.getItems().addAll(bookService.getAll().stream().map(val -> val.getBookID() + " # " + val.getBookName()).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleDelete(ActionEvent actionEvent) {
-        if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
-            handleDeleteInArrayList();
-        } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
-            handleDeleteInHashMap();
-        } else if (selectDataStructureComboBox.getValue().equals("Set")) {
-            handleDeleteInHashSet();
+        try {
+            if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
+                handleDeleteInArrayList();
+            } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
+                handleDeleteInHashMap();
+            } else if (selectDataStructureComboBox.getValue().equals("Set")) {
+                handleDeleteInHashSet();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void handleDeleteInArrayList() {
-        String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
-        int selectionId = Integer.parseInt(String.valueOf(Arrays.stream(selection.split(" # ")).toArray()[0]));
-        selectValueComboBox.getItems().remove(selection);
-        personService.deletePerson(selectionId);
+        try {
+
+            String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
+            int selectionId = Integer.parseInt(String.valueOf(Arrays.stream(selection.split(" # ")).toArray()[0]));
+            selectValueComboBox.getItems().
+
+                    remove(selection);
+            personService.deletePerson(selectionId);
+        } catch (
+                Exception e) {
+            System.out.
+
+                    println(e.getMessage());
+        }
     }
 
     public void handleDeleteInHashMap() {
-        String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
-        String selectionKey = Arrays.stream(selection.split(", ")).toArray()[0].toString().split(": ")[1];
-        selectValueComboBox.getItems().remove(selection);
+        try {
+            String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
+            String selectionKey = Arrays.stream(selection.split(", ")).toArray()[0].toString().split(": ")[1];
+            selectValueComboBox.getItems().remove(selection);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleDeleteInHashSet() {
-        String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
-        String[] selectionArr = selection.split(" # ");
-        BookModel book = new BookModel(Integer.parseInt(String.valueOf(selectionArr[0])), selectionArr[1]);
-        selectValueComboBox.getItems().remove(selection);
-        bookService.deleteBook(book);
+        try {
+            String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
+            String[] selectionArr = selection.split(" # ");
+            BookModel book = new BookModel(Integer.parseInt(String.valueOf(selectionArr[0])), selectionArr[1]);
+            selectValueComboBox.getItems().remove(selection);
+            bookService.deleteBook(book);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleEdit(ActionEvent actionEvent) {
-        if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
-            handleEditInArrayList();
-        } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
-            handleEditInHashMap();
-        } else if (selectDataStructureComboBox.getValue().equals("Set")) {
-            handleEditInHashSet();
+        try {
+            if (selectDataStructureComboBox.getValue().equals("ArrayList")) {
+                handleEditInArrayList();
+            } else if (selectDataStructureComboBox.getValue().equals("HashMap")) {
+                handleEditInHashMap();
+            } else if (selectDataStructureComboBox.getValue().equals("Set")) {
+                handleEditInHashSet();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void handleEditInArrayList() {
-        List<String> list = personService.getAllPersons().stream().map(val -> {
-            if (selectValueComboBox.getSelectionModel().getSelectedItem().toString().equals(val.getId() + " # " + val.getName())) {
-                return val.getId() + " # " + valueTextField.getText();
-            }
-            return val.getId() + " # " + val.getName();
-        }).toList();
-        selectValueComboBox.getItems().clear();
-        selectValueComboBox.getItems().addAll(list);
-
+        try {
+            List<String> list = personService.getAllPersons().stream().map(val -> {
+                if (selectValueComboBox.getSelectionModel().getSelectedItem().toString().equals(val.getId() + " # " + val.getName())) {
+                    return val.getId() + " # " + valueTextField.getText();
+                }
+                return val.getId() + " # " + val.getName();
+            }).toList();
+            selectValueComboBox.getItems().clear();
+            selectValueComboBox.getItems().addAll(list);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleEditInHashMap() {
-        String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
-        String selectionKey = Arrays.stream(selection.split(", ")).toArray()[0].toString().split(": ")[1];
+        try {
 
-        List<String> carsList = carService.findAllCars().keySet().stream().map(key -> {
-            CarModel car = carService.getCar(key);
-            if (valueTextField.getText().equals(selectionKey)) {
-                return "Name: " + valueTextField.getText() + ", price: $" + car.getPrice();
-            }
-            return "Name: " + car.getName() + ", price: $" + car.getPrice();
-        }).toList();
-        selectValueComboBox.getItems().clear();
-        selectValueComboBox.getItems().addAll(carsList);
+            String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
+            String selectionKey = Arrays.stream(selection.split(", ")).toArray()[0].toString().split(": ")[1];
+
+            List<String> carsList = carService.findAllCars().keySet().stream().map(key -> {
+                CarModel car = carService.getCar(key);
+                if (valueTextField.getText().equals(selectionKey)) {
+                    return "Name: " + valueTextField.getText() + ", price: $" + car.getPrice();
+                }
+                return "Name: " + car.getName() + ", price: $" + car.getPrice();
+            }).toList();
+            selectValueComboBox.getItems().clear();
+            selectValueComboBox.getItems().addAll(carsList);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void handleEditInHashSet() {
-        String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
-        int id = Integer.parseInt(String.valueOf(Arrays.stream(selection.split(" # ")).toArray()[0]));
+        try {
+            String selection = selectValueComboBox.getSelectionModel().getSelectedItem().toString();
+            int id = Integer.parseInt(String.valueOf(Arrays.stream(selection.split(" # ")).toArray()[0]));
 
-        List<String> books = bookService.getAll().stream().map(book -> {
-            if (book.getBookID() == id) {
-                return id + " # " + valueTextField.getText();
-            }
+            List<String> books = bookService.getAll().stream().map(book -> {
+                if (book.getBookID() == id) {
+                    return id + " # " + valueTextField.getText();
+                }
 
-            return book.getBookID() + " # " + book.getBookName();
-        }).toList();
+                return book.getBookID() + " # " + book.getBookName();
+            }).toList();
 
-        selectValueComboBox.getItems().clear();
-        selectValueComboBox.getItems().addAll(books);
+            selectValueComboBox.getItems().clear();
+            selectValueComboBox.getItems().addAll(books);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     public void goToTextProcessingTool(ActionEvent actionEvent) throws IOException {
-        navigateToView(actionEvent, "/com/lab6/textprocessinganddatamanagementtoolteamproject/text-processing-tool-view.fxml", "Text Processing Tool");
+        try {
+            navigateToView(actionEvent, "/com/lab6/textprocessinganddatamanagementtoolteamproject/text-processing-tool-view.fxml", "Text Processing Tool");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void navigateToView(ActionEvent actionEvent, String fxmlPath, String title) {
@@ -203,9 +287,7 @@ public class DataModuleController {
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace(); // Log the error
-            // Optionally: show an error dialog or handle the error appropriately
+            System.out.println(e.getMessage());
         }
     }
-
 }

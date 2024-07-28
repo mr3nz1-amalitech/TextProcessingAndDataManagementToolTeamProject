@@ -30,52 +30,91 @@ public class TextProcessingModuleController {
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace(); // Log the error
-            // Optionally: show an error dialog or handle the error appropriately
+            e.printStackTrace();
         }
     }
 
     public void clearText(ActionEvent actionEvent) {
-        textArea.clear();
-        textOutput.setText("");
-        regexTextInput.clear();
+        try {
+            textArea.clear();
+            textOutput.setText("");
+            regexTextInput.clear();
+
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void replaceText(ActionEvent actionEvent) {
-        Pattern pattern = Pattern.compile(regexTextInput.getText(), Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(textArea.getText());
-        StringBuilder replacedText = new StringBuilder();
-        textOutput.setText("");
+        try {
+            Pattern pattern = Pattern.compile(regexTextInput.getText(), Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(textArea.getText());
+            StringBuilder replacedText = new StringBuilder();
+            StringBuilder matchedValues = new StringBuilder();
 
-        while (matcher.find()) {
-            textOutput.setText("Value= " + matcher.group());
-            matcher.appendReplacement(replacedText, newTextTextField.getText());
+            while (matcher.find()) {
+                matchedValues.append(matcher.group());
+                matcher.appendReplacement(replacedText, newTextTextField.getText());
+            }
+            matcher.appendTail(replacedText);
+
+            // Set the output text
+            textOutput.setText("Replaced text:\n" + replacedText.toString());
+
+            // Clear input fields
+            regexTextInput.clear();
+
+            textArea.clear();
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
-
-        matcher.appendTail(replacedText);
-
-        textOutput.setText(replacedText.toString());
-        regexTextInput.clear();
-        textArea.clear();
     }
 
     public void searchText(ActionEvent actionEvent) {
-        Pattern pattern = Pattern.compile(regexTextInput.getText(), Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(textArea.getText());
-        boolean matchFound = matcher.find();
+        try {
+            Pattern pattern = Pattern.compile(regexTextInput.getText(), Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(textArea.getText());
 
-        textOutput.setText("");
+            textOutput.setText("");
 
-        if (matchFound) {
-            textOutput.setText("Value= " + matcher.group());
+            while (matcher.find()) {
+                textOutput.setText(wrapMatchingString(textArea.getText(), matcher.group()));
+            }
+
+            if (matcher.find()) {
+                textOutput.setText("Value= " + matcher.group());
+            } else {
+                textOutput.setText("No match found");
+            }
+
+            regexTextInput.clear();
+            textArea.clear();
+
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
-
-        regexTextInput.clear();
-        textArea.clear();
     }
+
+    public static String wrapMatchingString(String text, String searchString) {
+        try {
+            if (text == null || searchString == null || text.isEmpty() || searchString.isEmpty()) {
+                return text;
+            }
+
+            return text.replaceAll(Pattern.quote(searchString), "\"" + searchString + "\"");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     @FXML
     public void goToDataManagementModule(ActionEvent actionEvent) {
-        navigateToView(actionEvent, "/com/lab6/textprocessinganddatamanagementtoolteamproject/hello-view.fxml", "Text Processing Tool");
+        try {
+            navigateToView(actionEvent, "/com/lab6/textprocessinganddatamanagementtoolteamproject/hello-view.fxml", "Text Processing Tool");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -7,36 +7,44 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab6.textprocessinganddatamanagementtoolteamproject.controller.TextProcessingModuleController">
-   <children>
-      <VBox layoutX="158.0" layoutY="31.0" prefHeight="338.0" prefWidth="282.0">
-         <children>
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text Processing" />
-                  <VBox prefHeight="0.0" prefWidth="100.0" />
-                  <Button onAction="#goToDataManagementModule" mnemonicParsing="false" style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Data management" />
-               </children>
-            </HBox>
-            <TextArea fx:id="textArea" prefHeight="110.0" prefWidth="282.0" promptText="Enter text" style="-fx-background-color: lightblue;" />
-            <VBox prefHeight="27.0" prefWidth="282.0" />
-            <TextField fx:id="regexTextInput" promptText="Enter regex" style="-fx-background-color: lightblue;" />
-            <VBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="282.0">
-               <children>
-                  <Text fx:id="textOutput" strokeType="OUTSIDE" strokeWidth="0.0" text="Matched text=" />
-               </children>
-            </VBox>
-            <TextField fx:id="newTextTextField" promptText="Text to replace text with" style="-fx-background-color: lightblue;" />
-            <VBox prefHeight="32.0" prefWidth="282.0" />
-            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="282.0">
-               <children>
-                  <Button onAction="#clearText" mnemonicParsing="false" style="-fx-background-color: crimson; -fx-text-fill: white;" text="clear" />
-                  <Button onAction="#replaceText" mnemonicParsing="false" style="-fx-background-color: gray; -fx-text-fill: white;" text="Replace" />
-                  <Button onAction="#searchText" mnemonicParsing="false" style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Search" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.lab6.textprocessinganddatamanagementtoolteamproject.controller.TextProcessingModuleController">
+    <children>
+        <VBox layoutX="158.0" layoutY="31.0" prefHeight="338.0" prefWidth="282.0">
+            <children>
+                <HBox>
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text Processing"/>
+                        <VBox prefHeight="0.0" prefWidth="100.0"/>
+                        <Button mnemonicParsing="false" onAction="#goToDataManagementModule"
+                                style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Data management"/>
+                    </children>
+                </HBox>
+                <TextArea fx:id="textArea" prefHeight="110.0" prefWidth="282.0" promptText="Enter text"
+                          style="-fx-background-color: lightblue;"/>
+                <VBox prefHeight="27.0" prefWidth="282.0"/>
+                <TextField fx:id="regexTextInput" promptText="Enter regex" style="-fx-background-color: lightblue;"/>
+                <VBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="282.0">
+                    <children>
+                        <Text fx:id="textOutput"/>
+                    </children>
+                </VBox>
+                <TextField fx:id="newTextTextField" promptText="Text to replace text with"
+                           style="-fx-background-color: lightblue;"/>
+                <VBox prefHeight="32.0" prefWidth="282.0"/>
+                <HBox alignment="CENTER" prefHeight="41.0" prefWidth="282.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#clearText"
+                                style="-fx-background-color: crimson; -fx-text-fill: white;" text="clear"/>
+                        <Button mnemonicParsing="false" onAction="#replaceText"
+                                style="-fx-background-color: gray; -fx-text-fill: white;" text="Replace"/>
+                        <Button mnemonicParsing="false" onAction="#searchText"
+                                style="-fx-background-color: dodgerblue; -fx-text-fill: white;" text="Search"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
